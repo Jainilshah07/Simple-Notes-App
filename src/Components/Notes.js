@@ -1,11 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext , useEffect } from "react";
 import NoteContext from "../Context/notes/NoteContext";
 import AddNote from "./AddNote";
 import Noteitem from "./Noteitem";
 
 const Notes = () => {
   const context = useContext(NoteContext);
-  const { notes, addNote } = context; //Destructuring
+  const { notes, getNotes } = context; //Destructuring
+  useEffect(()=>{
+    getNotes()
+  },[])
   return (
     <>
     <div className="container">
