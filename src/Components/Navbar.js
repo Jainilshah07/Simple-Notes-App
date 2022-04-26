@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import { Link , useLocation } from 'react-router-dom'
 
 export default function Navbar() {
-  let location = useLocation();
+  let location = useLocation();    // To show path 
   useEffect(()=>{
     console.log(location.pathname);
   },[location] );
