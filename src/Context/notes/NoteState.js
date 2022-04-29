@@ -18,7 +18,6 @@ const NoteState = (props) => {
       }
     });
     const json = await response.json()
-    console.log(json)
     setNotes(json)
   }
 
@@ -36,17 +35,7 @@ const addNote = async (title,description,tag)=> {
     body: JSON.stringify({title, description, tag})
   });
 
-
-  console.log("Adding a new Note ")
-  const note = {
-    "_id": "624c7088fbc288e143f6dfa0",
-   "user": "624b23af0713cf02759de933",
-    "title": title,
-    "description": description,
-    "tag": tag,
-    "date": "2022-04-05T16:38:32.437Z",
-    "__v": "0"
-  };
+  const note = await response.json();
   setNotes(notes.concat(note))
 }
 
@@ -63,9 +52,7 @@ const deleteNote = async (id)=> {
 });
 
 const json = response.json();
-console.log(json)
 
-  console.log("Deleting the note with id" + id);
   const newNotes = notes.filter((note)=>{return note._id!==id})
   setNotes(newNotes)
 }
@@ -75,24 +62,27 @@ console.log(json)
   const editNote = async (id, title, description, tag) => {
     // API Call 
     const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjI0YjIzYWYwNzEzY2YwMjc1OWRlOTMzIn0sImlhdCI6MTY0OTY1NTIxMH0.IjM1R6W_jwAIfh2RmeAo7F1v1x72mWCkXs2jQQRUqFU"
       },
       body: JSON.stringify({title, description, tag})
     });
-    const json = response.json();
+    const json = await response.json();
 
     // Logic to edit in client
-    for (let index = 0; index < notes.length; index++) {
-      const element = notes[index];
+    let newNotes = JSON.parse(JSON.stringify(notes))
+    for (let index = 0; index < newNotes.length; index++) {
+      const element = newNotes[index];
       if (element._id === id) {
-        element.title = title;
-        element.description = description;
-        element.tag = tag;
+        newNotes[index].title = title;
+        newNotes[index].description = description;
+        newNotes[index].tag = tag;
+        break;
       }
     }
+    setNotes(newNotes)
   }
   return (
     <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNotes }}>
