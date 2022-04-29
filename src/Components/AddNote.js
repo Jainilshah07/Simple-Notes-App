@@ -1,7 +1,7 @@
 import React ,{useContext, useState} from 'react'
 import NoteContext from "../Context/notes/NoteContext";
 
-const AddNote = () => {
+const AddNote = (props) => {
   const context = useContext(NoteContext);
   const {addNote} = context; //Destructuring
   const [note, setNote] = useState({title: "", description: "", tag: ""})
@@ -9,6 +9,7 @@ const AddNote = () => {
     e.preventDefault();          // USed so page doesn' t reload 
     addNote(note.title, note.description, note.tag);
     setNote({title: "", description: "", tag: ""})
+    props.showAlert("Added Successfully" ,"success")
   }
   
   const onChange = (e)=>{
@@ -36,7 +37,6 @@ const AddNote = () => {
                     <label htmlFor="tag" className="form-label">Tag</label>
                     <input type="text" className="form-control" id="tag" name="tag" value={note.tag} onChange={onChange} minLength={5} required />
                 </div>
-          
                 <button disabled={note.title.length<5 || note.description.length<5} type="submit" className="btn btn-primary" onClick={handleClick}>Add Note</button>
         </form> 
         </div>
