@@ -14,7 +14,7 @@ const NoteState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjI0YjIzYWYwNzEzY2YwMjc1OWRlOTMzIn0sImlhdCI6MTY0OTY1NTIxMH0.IjM1R6W_jwAIfh2RmeAo7F1v1x72mWCkXs2jQQRUqFU"
+        "auth-token": localStorage.getItem('token')
       }
     });
     const json = await response.json()
@@ -30,7 +30,7 @@ const addNote = async (title,description,tag)=> {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjI0YjIzYWYwNzEzY2YwMjc1OWRlOTMzIn0sImlhdCI6MTY0OTY1NTIxMH0.IjM1R6W_jwAIfh2RmeAo7F1v1x72mWCkXs2jQQRUqFU"
+      "auth-token": localStorage.getItem('token')
     },
     body: JSON.stringify({title, description, tag})
   });
@@ -47,11 +47,12 @@ const deleteNote = async (id)=> {
   method: 'DELETE',
   headers: {
     'Content-Type': 'application/json',
-    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjI0YjIzYWYwNzEzY2YwMjc1OWRlOTMzIn0sImlhdCI6MTY0OTY1NTIxMH0.IjM1R6W_jwAIfh2RmeAo7F1v1x72mWCkXs2jQQRUqFU"
+    "auth-token": localStorage.getItem('token')
   }
 });
 
 const json = response.json();
+console.log(json);
 
   const newNotes = notes.filter((note)=>{return note._id!==id})
   setNotes(newNotes)
@@ -65,11 +66,12 @@ const json = response.json();
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjI0YjIzYWYwNzEzY2YwMjc1OWRlOTMzIn0sImlhdCI6MTY0OTY1NTIxMH0.IjM1R6W_jwAIfh2RmeAo7F1v1x72mWCkXs2jQQRUqFU"
+        "auth-token": localStorage.getItem('token')
       },
       body: JSON.stringify({title, description, tag})
     });
     const json = await response.json();
+    console.log(json);
 
     // Logic to edit in client
     let newNotes = JSON.parse(JSON.stringify(notes))
