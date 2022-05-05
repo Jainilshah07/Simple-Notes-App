@@ -23,7 +23,7 @@ const Signup = (props) => {
         props.showAlert("Account Created Successfully" ,"success")
     }
     else{
-      props.showAlert("Invalid Credentials" ,"danger")
+      props.showAlert("This User Already Exits" ,"danger")
     }
 }
 
@@ -36,20 +36,20 @@ const onChange = (e)=>{
       <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">Name </label>
-                    <input type="text" className="form-control" onChange={onChange} id="name" name="name" aria-describedby="emailHelp" />
+                    <input type="text" className="form-control" onChange={onChange} placeholder='John Stokes'  id="name" name="name" aria-describedby="emailHelp" />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
-                    <input type="email" className="form-control" onChange={onChange} id="email" name="email" aria-describedby="emailHelp" />
+                    <input type="email" className="form-control" onChange={onChange} placeholder='you@example.com' id="email" name="email" aria-describedby="emailHelp" />
                     <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="password" className="form-label">Password</label>
-                    <input type="password" className="form-control" onChange={onChange} name="password" required minLength={5} id="password" />
+                    <input type="password" className="form-control" onChange={onChange} placeholder='Set A Strong Password : min 5 characters' name="password" required minLength={5} id="password" />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="cpassword" className="form-label">Confirm Password</label>
-                    <input type="password" className="form-control" onChange={onChange} name="cpassword" required minLength={5} id="cpassword" />
+                    <input type="password" className="form-control" onChange={onChange} placeholder='Enter Password Again ' name="cpassword" required minLength={5} id="cpassword" />
                 </div>
 
                 <button type="submit" className="btn btn-primary">Submit</button>

@@ -32,6 +32,7 @@ const Notes = (props) => {
     editNote(note.id ,note.etitle ,note.edescription ,note.etag)
     refClose.current.click();
     props.showAlert("Updated Successfully" ,"success")
+    // showAlert("Updated Successfully" ,"success" )
   }
   
   const onChange = (e)=>{

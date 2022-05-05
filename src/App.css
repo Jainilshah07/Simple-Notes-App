@@ -1,7 +1,13 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
+  background-image: url('../assets/Background_img.jpg');
+  min-height: 100vh;
+  /* vh means in comparision to the viewport size */
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  position: relative;
 }
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
